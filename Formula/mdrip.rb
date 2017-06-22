@@ -9,7 +9,10 @@ class Mdrip < Formula
   head "https://github.com/monopole/mdrip.git"
 
   depends_on "go" => :build
+  depends_on "tmux"
 
+
+  
   go_resource "github.com/golang/glog" do
     url "https://github.com/golang/glog.git",
       :revision => "23def4e6c14b4da8ac2ed8007337bc5eb5007998"
@@ -20,6 +23,8 @@ class Mdrip < Formula
     mkdir_p "src/github.com/monopole"
     ln_s buildpath, "src/github.com/monopole/mdrip"
     Language::Go.stage_deps resources, buildpath/"src"
+    inreplace "tmux/tmux.go", "/usr/bin/tmux", "/usr/local/bin/tmux"
+ 
     system "go", "build", "-o", bin/"mdrip"
   end
 
@@ -33,6 +38,6 @@ class Mdrip < Formula
     #
     # The installed folder is not in the path, so use the entire path to any
     # executables being tested: `system "#{bin}/program", "do", "something"`.
-    system "go", "test", "."    
+    system "go", "test", "." 
   end
 end

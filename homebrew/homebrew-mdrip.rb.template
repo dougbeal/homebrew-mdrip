@@ -1,0 +1,31 @@
+#
+# assets/formula.rb
+#
+# Copyright (c) 2016 Junpei Kawamoto
+#
+# This software is released under the MIT License.
+#
+# http://opensource.org/licenses/mit-license.php
+#
+class Homebrew-Mdrip < Formula
+  desc ""
+  homepage "https://github.com/https://github.com/monopole/mdrip.git/homebrew-mdrip"
+  version "{{.Version}}"
+
+  if Hardware::CPU.is_64_bit?
+    url "https://github.com/https://github.com/monopole/mdrip.git/homebrew-mdrip/releases/download/v{{.Version}}/{{.FileName64}}"
+    sha256 "{{.Hash64}}"
+  else
+    url "https://github.com/https://github.com/monopole/mdrip.git/homebrew-mdrip/releases/download/v{{.Version}}/{{.FileName386}}"
+    sha256 "{{.Hash386}}"
+  end
+
+  def install
+    bin.install "homebrew-mdrip"
+  end
+
+  test do
+    system "homebrew-mdrip"
+  end
+
+end
